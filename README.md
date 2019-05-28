@@ -1,24 +1,31 @@
-# mu-project
+# Notule Harvester
 
-Bootstrap a mu.semte.ch microservices environment in three easy steps.
+## Running and maintaining
 
-## How to
+  General information on running and maintaining an installation
 
-Setting up your environment is done in three easy steps:  first you configure the running microservices and their names in `docker-compose.yml`, then you configure how requests are dispatched in `config/dispatcher.ex`, and lastly you start everything.
+### Running your setup
 
-### Hooking things up with docker-compose
+  ```
+  docker-compose up
+  ```
 
-Alter the `docker-compose.yml` file so it contains all microservices you need.  The example content should be clear, but you can find more information in the [Docker Compose documentation](https://docs.docker.com/compose/).  Don't remove the `identifier` and `db` container, they are respectively the entry-point and the database of your application.  Don't forget to link the necessary microservices to the dispatcher and the database to the microservices.
+  The stack is built starting from [mu-project](https://github.com/mu-semtech/mu-project).
 
-### Configure the dispatcher
+### Upgrading your setup
 
-Next, alter the file `config/dispatcher.ex` based on the example that is there by default.  Dispatch requests to the necessary microservices based on the names you used for the microservice.
+  Once installed, you may desire to upgrade your current setup to follow development of the main stack. The following example describes how to do this easily for both the demo setup, as well as for the dev setup.
 
-### Boot up the system
+### Cleaning the database
 
-Boot your microservices-enabled system using docker-compose.
+  At some times you may want te clean the database and make sure it's in a pristine state.
 
-    cd /path/to/mu-project
-    docker-compose up
+      # Bring down our current setup
+      docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
+      # Keep only required database files
+      rm -Rf data/db
+      git checkout data/db
+      # Bring the stack back up
+      docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-You can shut down using `docker-compose stop` and remove everything using `docker-compose rm`.
+  Make sure to wait for the migrations to run.
