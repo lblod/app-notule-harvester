@@ -9,6 +9,8 @@
 /data/db/virtuoso.pxa
 /data/db/virtuoso.trx
 
+/data/files/*
+
 .DS_Store
 *~
 
