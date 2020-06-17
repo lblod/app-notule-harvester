@@ -1,4 +1,6 @@
-# Notule Harvester
+# Notule Harvester [Archived]
+
+This has been replaced with [app-centrale-vindplaats](https://github.com/lblod/app-centrale-vindplaats)
 
 ## Running and maintaining
 
